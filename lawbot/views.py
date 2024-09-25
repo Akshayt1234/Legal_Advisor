@@ -10,8 +10,8 @@ from django.utils.encoding import force_bytes, force_str
 
 
 # Home page view
-def index(request):
-    return render(request, 'index.html')
+def main(request):
+    return render(request, 'main.html')
 
 
 # Login view
@@ -42,7 +42,18 @@ def signup(request):
         email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
+        
+        
+         # Check if the username contains uppercase letters
+        if any(char.isupper() for char in username):
+            messages.error(request, 'Username must not contain uppercase letters.')
+            return redirect('signup')  # Redirect back to signup page if error occurs
+        
+        username = username.lower()
 
+        if not username.strip() or not email.strip() or not pass1.strip():
+            messages.error(request, 'Please fill out all the required fields.')
+            return redirect('signup')
         # Check for existing username
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists! Please try another username.")
@@ -67,7 +78,7 @@ def signup(request):
         if not username.isalnum():
             messages.error(request, "Username must be alphanumeric!")
             return redirect('signup')
-
+        
         # Create the user and save
         myuser = User.objects.create_user(username=username, email=email, password=pass1)
         myuser.save()
@@ -98,8 +109,12 @@ def team(request):
 def signout(request):
     auth_logout(request)
     messages.success(request, "Logged out successfully!")
-    return redirect('index')
+    return redirect('login')
 
 # bot page view
 def bot(request):
     return render(request, 'bot.html')
+
+
+def index(request):
+    return render(request, 'index.html')

@@ -45,14 +45,14 @@
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="{% url 'index' %}" class="logo d-flex align-items-center me-auto">
+      <a href="{% url 'main' %}" class="logo d-flex align-items-center me-auto">
         <img src="{% static '/assets/img/logo.png' %}" alt="">
         <h1 class="sitename">Legal Adviser</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'main' %}">Home</a></li>
           
           <li><a href="login">Login</a></li>
           <li><a href="signup">Register</a></li>
@@ -73,7 +73,15 @@
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
+                      <div id="message-container">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="er">{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                        <h2 class="form-title">Register</h2>
+                       
                         <form method="post" class="register-form" id="register-form" action="signup" >
                           {% csrf_token %}
                           {{ form.as_p }}
@@ -117,5 +125,14 @@
     <!-- JS -->
     <script src="{% static '/assets/sign_in_up/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static '/assets/sign_in_up/js/main.js' %}"></script>
+    <script>
+      // Set timeout to hide messages after 5 seconds
+      setTimeout(function() {
+          var messageContainer = document.getElementById('message-container');
+          if (messageContainer) {
+              messageContainer.style.display = 'none';
+          }
+      }, 5000); // 5000 milliseconds = 5 seconds
+  </script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

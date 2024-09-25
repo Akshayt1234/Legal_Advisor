@@ -45,7 +45,7 @@
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="{% url 'index' %}" class="logo d-flex align-items-center me-auto">
+      <a href="{% url 'main' %}" class="logo d-flex align-items-center me-auto">
         <img src="{% static 'assets/img/logo.png' %}" alt="">
         <h1 class="sitename">Legal Adviser</h1>
       </a>
@@ -54,6 +54,7 @@
         <ul>
           
           <li><a href="signout">Logout</a></li>
+          <li><a href="chat">Back</a></li>
           
        
           
@@ -85,7 +86,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="{% url 'index' %}" class="logo d-flex align-items-center">
+          <a href="{% url 'main' %}" class="logo d-flex align-items-center">
             <span class="sitename">Legal adviser</span>
           </a>
           <div class="footer-contact pt-3">
@@ -105,7 +106,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="{% url 'index' %} ">Home</a></li>
+            <li><a href="{% url 'main' %} ">Home</a></li>
             <li><a href="#services">Services</a></li>
             
             <li><a href="privacy">Privacy policy</a></li>
